@@ -35,7 +35,6 @@ class AddListJson
             Console.WriteLine("Не найдено ни одной карточки сотрудника");
             AddInListJs();
         }
-        //AddFullList(tom);       
     }
 
     /// <summary>
