@@ -3,7 +3,11 @@
 class AddListJson
 {
     private static List<Persone>? tomList = new();
-    public void AddInList()  // Метод записть в файл Json
+
+    /// <summary>
+    /// Метод записть в файл Json
+    /// </summary>
+    public void AddInList()
     {
         string patch = "jsonPersT.json";
         var settings = new JsonSerializerSettings  // Это задаем формат Json
@@ -13,9 +17,12 @@ class AddListJson
         string output = JsonConvert.SerializeObject(tomList, settings);  // Создаем строку в формате Json      
         File.WriteAllText(patch, output);  // Записываем файл Json на диск
     }
+
+    /// <summary>
+    /// Чтение данных из файла "jsonPers.json"
+    /// </summary>
     public void GetFileInList()
     {
-        //Чтение данных из файла "jsonPers.json"
         // Читаем файл Json с диска и перегоняем в формат List<Person> с помощью статического конструктора
         string patch = "jsonPersT.json";
         if (File.Exists(patch))
@@ -28,11 +35,13 @@ class AddListJson
             Console.WriteLine("Не найдено ни одной карточки сотрудника");
             AddInListJs();
         }
-
-
         //AddFullList(tom);       
     }
-    public void AddInListJs()  //Метод заполнения карты
+
+    /// <summary>
+    /// Метод заполнения карты
+    /// </summary>
+    public void AddInListJs()
     {
         var tomAdd = new List<Persone>();
         bool activeAddList = true;
@@ -47,9 +56,7 @@ class AddListJson
             byte age = Convert.ToByte(Console.ReadLine());
 
             //Добавить в коллекцию
-
             tomAdd.Add(new Persone(lastName, firstName, age));
-
 
             Console.WriteLine("1. Создать еще карту\n2. Выйти из создания крты");
             try
@@ -75,7 +82,22 @@ class AddListJson
 
     public void AddFullList(List<Persone> person)
     {
-        tomList.AddRange(new List<Persone>(person));
+        tomList?.AddRange(new List<Persone>(person));
     }
 
+    /// <summary>
+    /// Метод для вывода списка сотрудников
+    /// </summary>
+    public void ShowList()
+    {
+        if (tomList == null)
+        {
+            Console.WriteLine("Не найдено ни одной карточки сотрудника");
+            return;
+        }
+        foreach (var item in tomList.OrderBy(item => string.Concat(item.LastName, item.FirstName)))
+        {
+            Console.WriteLine($"{item.LastName} {item.FirstName}");
+        }
+    }
 }

@@ -6,8 +6,8 @@ addList.GetFileInList();
 bool active = true;
 while (active)
 {
-    Console.WriteLine("1. Создать карту для нового сотрудника \n2. Поиск карты сотрудника \n3. Добавить на счет");
-    Console.WriteLine("4. Выйти из программы");
+    Console.WriteLine("1. Создать карту для нового сотрудника \n2. Поиск карты сотрудника \n3. Добавить на счет \n4. Список сотрудников");
+    Console.WriteLine("5. Выйти из программы");
     Console.Write("Введите номер пункта: ");
 
     try
@@ -19,6 +19,9 @@ while (active)
                 addList.AddInListJs();
                 break;
             case 4:
+                addList.ShowList();
+                break;
+            case 5:
                 addList.AddInList();
                 active = false;
                 break;
